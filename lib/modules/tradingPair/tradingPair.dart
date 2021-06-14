@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:CanuckCrypto/Global/Global.dart';
+import 'package:CanuckCrypto/model/ProviderModel.dart';
 import 'package:CanuckCrypto/modules/buysell/buypage.dart';
 import 'package:CanuckCrypto/modules/buysell/buysell.dart';
 import 'package:CanuckCrypto/modules/withdraw/withdrawTabbar.dart';
@@ -17,6 +19,9 @@ import '../../constance/global.dart' as globals;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:CanuckCrypto/constance/Colors.dart';
 import 'package:CanuckCrypto/modules/withdraw/WithDraw.dart';
+import 'package:CanuckCrypto/model/ProviderModel.dart';
+import 'package:provider/provider.dart';
+
 
 class LiveTradingPair extends StatefulWidget {
   bool isWithoutAppBar;
@@ -165,7 +170,7 @@ class _LiveTradingPairState extends State<LiveTradingPair> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    'Balance',
+                    'Wallet',
                     style: TextStyle(
                       color: AllCoustomTheme.getTextThemeColors(),
                       fontWeight: FontWeight.bold,
@@ -323,16 +328,29 @@ class _LiveTradingPairState extends State<LiveTradingPair> {
                                                         Expanded(
                                                           child: SizedBox(),
                                                         ),
-                                                        Text(
-                                                          finalTradingPair
-                                                              .minimumOrder
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                            color: AllCoustomTheme
-                                                                .getTextThemeColors(
-                                                                isContrast: false),
+                                               // UpdateCurrency(  finalTradingPair.minimumOrder),
+                                                        Container(
+                                                          child: Consumer<MyModel>( //                    <--- Consumer
+                                                            builder: (context, myModel, child) {
+                                                              return Text(
+                                                                //myModel.someValue,
+                                                                  UpdateCurrency(  finalTradingPair.minimumOrder).toString(),
+                                                                style: TextStyle(
+                                                                  color: AllCoustomTheme
+                                                                      .getTextThemeColors(
+                                                                      isContrast: false),
+                                                                ),
+                                                              );
+                                                            },
                                                           ),
                                                         ),
+                                                // Text(UpdateCurrency(  finalTradingPair.minimumOrder).toString(),
+                                                //           style: TextStyle(
+                                                //             color: AllCoustomTheme
+                                                //                 .getTextThemeColors(
+                                                //                 isContrast: false),
+                                                //           ),
+                                                //         ),
                                                       ],
                                                     ),
                                                     SizedBox(
@@ -478,4 +496,18 @@ class _LiveTradingPairState extends State<LiveTradingPair> {
   }
 
   bool _isSearch = false;
+
+  UpdateCurrency(String currency){
+   String price = currency.split(' ')[0];
+   print(price);
+   double api = double.parse( price);
+// int string = int.parse( Global.currencyname.split('.')[0]);
+// print(string);
+  double hell = api * double.parse(  Global.currencyname);
+  print(hell);
+    return  hell ;
+  }
 }
+
+
+

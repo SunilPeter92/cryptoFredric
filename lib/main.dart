@@ -6,6 +6,7 @@ import 'package:CanuckCrypto/auth/EmailVerification.dart';
 import 'package:CanuckCrypto/auth/IdentityVerification.dart';
 import 'package:CanuckCrypto/auth/Verification.dart';
 import 'package:CanuckCrypto/auth/loginSelection.dart';
+import 'package:CanuckCrypto/model/ProviderModel.dart';
 import 'package:CanuckCrypto/modules/myWallet/wallet.dart';
 import 'package:CanuckCrypto/splash/SplashScreens.dart';
 
@@ -22,6 +23,8 @@ import 'constance/themes.dart';
 import 'modules/home/homeScreen.dart';
 import 'modules/introduction/introductionScreen.dart';
 import 'modules/introduction/swipeIndtroduction.dart';
+import 'package:provider/provider.dart';
+
 
 Map portfolioMap;
 List marketListData = [];
@@ -55,7 +58,7 @@ void main() async {
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
   );
-
+  Provider.debugCheckInvalidValueType = null;
   runApp(
     MyApp(),
   );
@@ -112,12 +115,15 @@ class _MyAppState extends State<MyApp> {
     ));
     return Container(
       color: AllCoustomTheme.getThemeData().primaryColor,
-      child: MaterialApp(
+      child:Provider<MyModel>( //                                <--- Provider
+        create: (context) => MyModel(),
+        child:   MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Crypto Trade',
         routes: routes,
         theme: AllCoustomTheme.getThemeData(),
       ),
+      )
     );
     TestQur();
   }

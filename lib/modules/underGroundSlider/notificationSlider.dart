@@ -154,10 +154,10 @@ class _NotificationSliderState extends State<NotificationSlider> {
                       ),
                       CupertinoSwitch(
                         activeColor: Colors.blue,
-                        value: _lights,
+                        value: _lights1,
                         onChanged: (bool value) {
                           setState(() {
-                            _lights = value;
+                            _lights1 = value;
                           });
                         },
                       ),
@@ -180,10 +180,10 @@ class _NotificationSliderState extends State<NotificationSlider> {
                       ),
                       CupertinoSwitch(
                         activeColor: Colors.blue,
-                        value: endOfDay,
+                        value: endOfDay1,
                         onChanged: (bool value) {
                           setState(() {
-                            endOfDay = value;
+                            endOfDay1 = value;
                           });
                         },
                       ),
@@ -202,5 +202,7 @@ class _NotificationSliderState extends State<NotificationSlider> {
   }
 
   bool _lights = true;
+  bool _lights1 = false;
   bool endOfDay = false;
+  bool endOfDay1 = false;
 }

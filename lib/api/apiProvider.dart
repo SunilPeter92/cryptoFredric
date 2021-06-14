@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:CanuckCrypto/model/CurrencyRateModel.dart';
+
 import '../model/PairDetailInfoModel.dart';
 import '../model/PairTransactionDetailModel.dart';
 import '../model/liveCryptoNewsModel.dart';
@@ -7,6 +9,7 @@ import '../constance/constance.dart';
 import '../model/liveTradingPairModel.dart';
 
 class ApiProvider {
+
   Future<List<TradingPair>> getTradingPairsDetail() async {
     String urlString = ConstanceData.LiveTradingPairs;
     List<TradingPair> responseData = List<TradingPair>();
@@ -70,6 +73,20 @@ class ApiProvider {
       });
       if (response.statusCode == 200) {
         responseData = CryptoNewsLive.fromJson(jsonDecode(response.body));
+      }
+    } catch (e) {
+      print(e);
+    }
+    return responseData;
+  }
+
+  Future<CurrencyRateModel> Currency() async {
+    String urlString = 'https://api.currencyfreaks.com/latest?apikey=0e72e46c72614640a119ae364b350296&symbols=PKR,GBP,EUR,USD';
+    CurrencyRateModel responseData;
+    try {
+      var response = await http.get(Uri.encodeFull(urlString), );
+      if (response.statusCode == 200) {
+        responseData = CurrencyRateModel.fromJson(jsonDecode(response.body));
       }
     } catch (e) {
       print(e);

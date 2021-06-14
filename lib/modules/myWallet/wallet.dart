@@ -18,6 +18,8 @@ import '../../constance/global.dart' as globals;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:CanuckCrypto/constance/Colors.dart';
+import 'package:CanuckCrypto/Global/Global.dart';
+
 
 class MyWallet extends StatefulWidget {
   bool isWithoutAppBar;
@@ -53,14 +55,14 @@ class _MyWalletState extends State<MyWallet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+       key: _scaffoldKey,
       drawer: SizedBox(
         width: MediaQuery.of(context).size.width * 0.75 < 400
             ? MediaQuery.of(context).size.width * 0.75
             : 350,
         child: Drawer(
           child: AppDrawer(
-            selectItemName: 'wallet',
+            selectItemName: 'tradingpair',
           ),
         ),
       ),
@@ -81,7 +83,9 @@ class _MyWalletState extends State<MyWallet> {
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
-                            _scaffoldKey.currentState.openDrawer();
+                            !widget.isWithoutAppBar?
+                            _scaffoldKey.currentState.openDrawer():
+                            widget.scaffoldKey.currentState.openDrawer();
                           },
                           child: Icon(
                             Icons.sort,
@@ -141,8 +145,10 @@ class _MyWalletState extends State<MyWallet> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Text(
-                          '\$',
-                          style: TextStyle(
+                   // Global.currencyname == null?
+                    '\$' ,
+                      //  :Global.currencyname ,
+                    style: TextStyle(
                             color: darkblue,
                             fontWeight: FontWeight.bold,
                             fontSize: ConstanceData.SIZE_TITLE20,

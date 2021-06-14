@@ -1,10 +1,15 @@
 import 'package:CanuckCrypto/constance/constance.dart';
 import 'package:CanuckCrypto/constance/themes.dart';
+import 'package:CanuckCrypto/modules/chagePIN/changepin.dart';
 import 'package:CanuckCrypto/modules/drawer/drawer.dart';
+import 'package:CanuckCrypto/Global/Global.dart';
 import 'package:CanuckCrypto/modules/underGroundSlider/notificationSlider.dart';
+import 'package:CanuckCrypto/modules/currency Preference/CurrencyPreference.dart';
+import 'package:CanuckCrypto/modules/userProfile/userProfile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:CanuckCrypto/constance/Colors.dart';
+import 'package:currency_picker/currency_picker.dart';
 
 
 class Setting extends StatefulWidget {
@@ -154,17 +159,39 @@ class _SettingState extends State<Setting> {
                     SizedBox(
                       height: 10,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          'Currency Preference',
-                          style: TextStyle(
-                            color: AllCoustomTheme.getTextThemeColors(),
+                    InkWell(
+                      onTap:(){
+                        // showCurrencyPicker(
+                        //   context: context,
+                        //   showFlag: true,
+                        //   showCurrencyName: true,
+                        //   showCurrencyCode: true,
+                        //   onSelect: (Currency currency) {
+                        //     setState(() {
+                        //       Global.currencyname = currency.name;
+                        //     });
+                        //     print('Select currency: ${currency.name}');
+                        //   },
+                        // );
+
+                        Navigator.of(context).push(
+                          CupertinoPageRoute(
+                            builder: (BuildContext context) => CurrencyPreference(),
                           ),
-                        ),
-                        Icon(Icons.arrow_forward_ios_rounded ,  color: black, size: 15,)
-                      ],
+                        );
+                        },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Currency Preference',
+                            style: TextStyle(
+                              color: AllCoustomTheme.getTextThemeColors(),
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward_ios_rounded ,  color: black, size: 15,)
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 8,
@@ -212,8 +239,8 @@ class _SettingState extends State<Setting> {
                         // Navigator.of(context).push(
                         //   CupertinoPageRoute(
                         //     builder: (BuildContext context) => UserProfile(),
-                        //   ),
-                        // );
+                         // ),
+                      //  );
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

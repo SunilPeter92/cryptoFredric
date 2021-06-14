@@ -24,6 +24,9 @@ import 'package:flutter/material.dart';
 import '../../constance/global.dart' as globals;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:CanuckCrypto/constance/Colors.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:launch_review/launch_review.dart';
+
 
 class AppDrawer extends StatefulWidget {
   final String selectItemName;
@@ -382,7 +385,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                   axis: Axis.horizontal,
                                   axisAlignment: 1,
                                   child: Text(
-                                    'Balance',
+                                    'Wallet',
                                     style: TextStyle(
                                       color: AllCoustomTheme.getTextThemeColors(
                                           isContrast: true),
@@ -1146,15 +1149,10 @@ class _AppDrawerState extends State<AppDrawer> {
                         InkWell(
                           highlightColor: Colors.transparent,
                           splashColor: Colors.transparent,
-                          onTap: () {
-                            Navigator.pop(context);
-                            Navigator.of(context).push(
-                              CupertinoPageRoute<void>(
-                                builder: (BuildContext context) =>
-                                    WithDrawCurrency(),
-                              ),
-                            );
-                          },
+                          onTap: _launchEmail,
+                           // Navigator.pop(context);
+
+
                           child: Row(
                             children: <Widget>[
                               Animator(
@@ -1224,13 +1222,8 @@ class _AppDrawerState extends State<AppDrawer> {
                           highlightColor: Colors.transparent,
                           splashColor: Colors.transparent,
                           onTap: () {
-                            Navigator.pop(context);
-                            // Navigator.of(context).push(
-                            //   CupertinoPageRoute<void>(
-                            //     builder: (BuildContext context) =>
-                            //         WithDrawCurrency(),
-                            //   ),
-                            // );
+                            LaunchReview.launch(androidAppId: "com.facebook.katana",
+                                iOSAppId: "284882215");
                           },
                           child: Row(
                             children: <Widget>[
@@ -1506,5 +1499,9 @@ class _AppDrawerState extends State<AppDrawer> {
         ),
       ),
     );
+  }
+  _launchEmail() async {
+    launch(
+        "mailto:reyana015@gmail.com?subject=TestEmail&body=How are you%20plugin");
   }
 }
